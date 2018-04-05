@@ -27,11 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: curl -sS https://getcomposer.org/installer | php
-      - run: sudo apt-get install -y libpng-dev
-      - run:
-          name: Install PHP Extensions
-          command: sudo docker-php-ext-install gd
-										
+
       - save_cache:
           paths:
             - ./vendor
