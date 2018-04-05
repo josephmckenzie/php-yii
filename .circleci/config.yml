@@ -14,7 +14,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mysql:9.4
 
-    working_directory: ~/repo
+    working_directory: ~/basic
 
     steps:
       - checkout
@@ -26,7 +26,8 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: composer install -n --prefer-dist
+      - run: curl -sS https://getcomposer.org/installer | php
+             mv composer.phar /usr/local/bin/composer
 
       - save_cache:
           paths:
