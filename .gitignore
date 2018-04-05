@@ -35,3 +35,11 @@ tests/_support/_generated
 #Enviromental Variables
 .env
 .env.php
+
+#SSH KEY
+
+ssh.txt
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

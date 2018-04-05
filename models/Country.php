@@ -29,9 +29,9 @@ class Country extends \yii\db\ActiveRecord
         return [
             [['code', 'name'], 'required'],
             [['population'], 'integer'],
-            [['code'], 'string', 'max' => 2],
-            [['name'], 'string', 'max' => 52],
-            [['code'], 'unique'],
+            [['code'], 'string', 'max' => 200],
+            [['name'], 'string', 'max' => 1000],
+//            [['code'], 'unique'],
         ];
     }
 
@@ -41,9 +41,9 @@ class Country extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'code' => 'Code',
-            'name' => 'Name',
-            'population' => 'Population',
+            'code' => 'Person\'s Initials',
+            'name' => 'Saying',
+            'population' => 'Number of Likes',
         ];
     }
 }
