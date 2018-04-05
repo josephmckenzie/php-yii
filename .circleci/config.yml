@@ -27,7 +27,8 @@ jobs:
           - v1-dependencies-
 
       - run: curl -sS https://getcomposer.org/installer | php
-      - run: sudo apt install php70u-gd
+      - run: sudo apt install yum
+						- run: sudo yum install php70u-gd
       - save_cache:
           paths:
             - ./vendor
