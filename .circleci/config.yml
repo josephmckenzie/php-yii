@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev && sudo docker-php-ext-install gd exif
+      - run: sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -27,7 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: curl -sS https://getcomposer.org/installer | php
-      - run: sudo apt install yum && sudo yum install php70u-gd
+      
       - save_cache:
           paths:
             - ./vendor
