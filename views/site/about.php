@@ -13,6 +13,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         This is the About page.
     </p>
-
+<?php echo php_ini_loaded_file(); ?>
 <!--    <code><?= __FILE__ ?></code>-->
 </div>
