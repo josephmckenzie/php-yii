@@ -21,7 +21,7 @@ jobs:
       -
         run:
           name: 'Install awscli'
-          command: "sudo pip install awsebcli --upgrade\n"
+          command: "sudo apt install awsebcli --upgrade\n"
       -
         run:
           name: 'Create AWS credentials manually'
