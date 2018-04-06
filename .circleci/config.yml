@@ -1,40 +1,37 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
 version: 2
 jobs:
-  deploy:
+  build:
     docker:
-      - image: circleci/ruby:2.4.1
+      # specify the version you desire here
+      - image: circleci/7-fpm-dev
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mysql:9.4
+
     working_directory: ~/basic
+
     steps:
       - checkout
-      -
-        run: 'sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev && sudo apt-get install apache2 && sudo apt-get install mysql-server && sudo apt-get update && sudo apt-get install php5-mysql php5-mysql && sudo /etc/init.d/apache2 restart'
-      -
-        restore_cache:
-          keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
-      -
-        run: 'curl -sS https://getcomposer.org/installer | php'
-      -
-        save_cache:
-          paths: [./vendor]
-          key: 'v1-dependencies-{{ checksum "composer.json" }}'
-      -
-        run:
-          name: 'Install awscli'
-          command: "sudo apt install awsebcli --upgrade\n"
-      -
-        run:
-          name: 'Create AWS credentials manually'
-          command: "mkdir ~/.aws\ntouch ~/.aws/config\nchmod 600 ~/.aws/config\necho \"[profile eb-cli]\" > ~/.aws/config\necho \"aws_access_key_id=$AWS_ACCESS_KEY_ID\" >> ~/.aws/config\necho \"aws_secret_access_key=$AWS_SECRET_ACCESS_KEY\" >> ~/.aws/config\n"
-      -
-        run: 'vendor/bin/codecept run'
-      -
-        run:
-          name: 'Deploy to EB if branch is Master'
-          command: "eb use PhpYii-env --profile eb-cli\neb deploy -v --staged --profile eb-cli\n"
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      -
-        deploy:
-          filters: { branches: { only: [master, develop] } }
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: curl -sS https://getcomposer.org/installer | php
+      - run: sudo apt install yum && sudo yum install php70u-gd
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+        
+      # run tests!
+      - run: vendor/bin/codecept run
