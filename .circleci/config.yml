@@ -4,34 +4,39 @@
 #
 version: 2
 jobs:
-	build:
-			docker:
-					# specify the version you desire here
-					- image: circleci/php:7.2-cli
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/php:7.2-cli
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mysql:9.4
 
-			working_directory: ~/basic
+    working_directory: ~/basic
 
-			steps:
-					- run: sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev
-					- run:
-									name: Install PHP Extensions
-									command: sudo docker-php-ext-install gd exif
+    steps:
+      - checkout
+      
+						- run: sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev
+						
+						- run:
+						    name: Install PHP Extensions
+										command: sudo docker-php-ext-install gd exif
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
 
-					- checkout
-
-					# Download and cache dependencies
-					- restore_cache:
-									keys:
-									- v1-dependencies-{{ checksum "composer.json" }}
-									# fallback to using the latest cache if no exact match is found
-					    - v1-dependencies-
-
-					- run: composer install -n --prefer-dist
-
-					- save_cache:
-									paths:
-											- ./vendor
-									key: v1-dependencies-{{ checksum "composer.json" }}
-
-					# run tests!
-					- run:  vendor/bin/codecept run
+      - run: curl -sS https://getcomposer.org/installer | php
+      - run: sudo apt install yum && sudo yum install php70u-gd
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
+        
+      # run tests!
+      - run: vendor/bin/codecept run
