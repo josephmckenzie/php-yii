@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       -
-        run: 'sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev && sudo apt-get install apache2 && sudo apt-get install mysql-server && sudo apt-get update apt-get install php5-mysql php5-mysql && sudo /etc/init.d/apache2 restart'
+        run: 'sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev && sudo apt-get install apache2 && sudo apt-get install mysql-server && sudo apt-get update && sudo apt-get install php5-mysql php5-mysql && sudo /etc/init.d/apache2 restart'
       -
         restore_cache:
           keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
