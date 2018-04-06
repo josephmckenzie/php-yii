@@ -2,53 +2,40 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: circleci/php:7.2-cli
+      -
+        image: 'circleci/php:7.2-cli'
     working_directory: ~/basic
     steps:
       - checkout
-						- run: sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: curl -sS https://getcomposer.org/installer | php
-      
-      - save_cache:
-          paths:
-            - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
-										
-      - run:
-          name: Install awscli
-          command: |
-            sudo pip install awsebcli --upgrade
-      - run:
-          name: Create AWS credentials manually
-          command: |
-            mkdir ~/.aws
-            touch ~/.aws/config
-            chmod 600 ~/.aws/config
-            echo "[profile eb-cli]" > ~/.aws/config
-            echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
-            echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-												
-						- run: vendor/bin/codecept run
-      - run:
-          name: Deploy to EB if branch is Master
-          command: |
-            eb use circleci-beanstalk-example --profile eb-cli
-            eb deploy -v --staged --profile eb-cli
- 
+      -
+        run: 'sudo apt-get update && sudo apt-get install -y libpng-dev libjpeg62-turbo-dev'
+      -
+        restore_cache:
+          keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
+      -
+        run: 'curl -sS https://getcomposer.org/installer | php'
+      -
+        save_cache:
+          paths: [./vendor]
+          key: 'v1-dependencies-{{ checksum "composer.json" }}'
+      -
+        run:
+          name: 'Install awscli'
+          command: "sudo pip install awsebcli --upgrade\n"
+      -
+        run:
+          name: 'Create AWS credentials manually'
+          command: "mkdir ~/.aws\ntouch ~/.aws/config\nchmod 600 ~/.aws/config\necho \"[profile eb-cli]\" > ~/.aws/config\necho \"aws_access_key_id=$AWS_ACCESS_KEY_ID\" >> ~/.aws/config\necho \"aws_secret_access_key=$AWS_SECRET_ACCESS_KEY\" >> ~/.aws/config\n"
+      -
+        run: 'vendor/bin/codecept run'
+      -
+        run:
+          name: 'Deploy to EB if branch is Master'
+          command: "eb use PhpYii-env --profile eb-cli\neb deploy -v --staged --profile eb-cli\n"
 workflows:
   version: 2
   build-deploy:
     jobs:
-      - deploy:
-          filters:
-            branches:
-              only:
-                - master
-                - develop
+      -
+        deploy:
+          filters: { branches: { only: [master, develop] } }
