@@ -11,7 +11,10 @@ jobs:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
           - v1-dependencies-
-      - run: bash install_needed_for_php.sh
+      - run:
+						    name: Install PHP
+										command: |
+										  bash install_needed_for_php.sh
       
       - save_cache:
           paths:
