@@ -3,7 +3,8 @@ jobs:
   build:
     docker:
       - image: tplatform/aws-linux-httpd24-php70
-      
+      - image: skubidoo/node-awsebcli
+          
     working_directory: ~/basic
     steps:
       - checkout
