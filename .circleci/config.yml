@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: tplatform/aws-linux-httpd24-php70
-      - image: cox-automotive/aws-ebcli
+      - image: coxauto/aws-ebcli
           
     working_directory: ~/basic
     steps:
