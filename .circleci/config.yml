@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: skubidoo/node-awsebcli
+      - image: josephmckenzie/joes-ubuntu-php
       
     working_directory: ~/basic
     steps:
