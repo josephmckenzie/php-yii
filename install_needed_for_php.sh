@@ -2,6 +2,8 @@
 
 apt-get install apache2 -y
 apt-get install mysql-server -y
+yes "" | command
+yes "" | command
 apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 yes "2" | command
 #have to press number 2 (America)
