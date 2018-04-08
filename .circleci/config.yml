@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: skubidoo/node-awsebcli
+      - image: nigelng/cci-node8-awsebcli
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
