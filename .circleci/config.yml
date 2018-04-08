@@ -2,9 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-#      - image: tplatform/aws-linux-httpd24-php70
-      - image: coxauto/aws-ebcli
-          
+      - image: tplatform/aws-linux-httpd24-php70
+      
     working_directory: ~/basic
     steps:
       - checkout
