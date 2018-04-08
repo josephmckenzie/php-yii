@@ -2,22 +2,21 @@ version: 2
 jobs:
   build:
     docker:
-      - image: josephmckenzie/joes-ubuntu-php
-      
+      -
+        image: josephmckenzie/joes-ubuntu-php
     working_directory: ~/basic
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "composer.json" }}
-          - v1-dependencies-
-      - run:
-						    name: Install PHP
-										command: |
-										  bash install_needed_for_php.sh
-      
-      - save_cache:
-          paths:
-            - ./vendor
-          key: v1-dependencies-{{ checksum "composer.json" }}
-      - run: vendor/bin/codecept run
+      -
+        restore_cache:
+          keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
+      -
+        run:
+          name: 'Install PHP'
+          command: "bash install_needed_for_php.sh\n"
+      -
+        save_cache:
+          paths: [./vendor]
+          key: 'v1-dependencies-{{ checksum "composer.json" }}'
+      -
+        run: 'vendor/bin/codecept run'
