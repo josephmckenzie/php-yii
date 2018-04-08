@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: gsandf/node-awsebcli-yarn
+      - image: tplatform/aws-linux-httpd24-php70
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
