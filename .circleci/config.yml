@@ -2,9 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.2-cli
-      - image: skubidoo/node-awsebcli
-      - image: gsandf/node-awsebcli-yarn
+      - image: tplatform/aws-linux-httpd24-php70
       
     working_directory: ~/basic
     steps:
