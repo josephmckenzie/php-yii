@@ -13,7 +13,7 @@ jobs:
       -
         run:
           name: 'Install PHP'
-          command: "bash install_needed_for_php.sh"
+          command: "echo hi"
       -
         save_cache:
           paths: [./vendor]
