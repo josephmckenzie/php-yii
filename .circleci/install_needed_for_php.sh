@@ -2,13 +2,11 @@
 
 apt-get install apache2 -y
 apt-get install mysql-server -y
-apt-get install php7.0 php7.0-fpm php7.0-mysql -y
-yes "2" | command
+yes '' | apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+
 #have to press number 2 (America)
 #enter twice
-yes "" | command
-yes "" | command
-yes "105" | command
+
 #press number 105 (newyork)
 /etc/init.d/apache2 restart
 
