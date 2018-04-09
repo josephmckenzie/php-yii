@@ -11,9 +11,9 @@ jobs:
         restore_cache:
           keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
       -
-#        run:
-#          name: 'Install PHP'
-#          command: "bash install_needed_for_php.sh\n"
+        run:
+          name: 'Install PHP'
+          command: "echo hi"
       -
         save_cache:
           paths: [./vendor]
