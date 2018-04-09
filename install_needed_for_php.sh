@@ -6,7 +6,8 @@ echo -en "\n\n"
 apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 #have to press number 2 (America)
 #enter twice
-
+echo "2"
+echo -en "\n\n"
 #press number 105 (newyork)
 /etc/init.d/apache2 restart
 
