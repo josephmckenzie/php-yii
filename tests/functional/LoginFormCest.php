@@ -51,7 +51,7 @@ class LoginFormCest
     {
         $I->submitForm('#login-form', [
             'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'admin',
+            'LoginForm[password]' => 'admin123',
         ]);
         $I->see('Logout (admin)');
         $I->dontSeeElement('form#login-form');              
