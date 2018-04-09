@@ -11,9 +11,12 @@ jobs:
         restore_cache:
           keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
       -
+						 run:
+							  name: 'Install tzdata'
+									command: "bash tzdata.sh"
+						-
         run:
           name: 'Install PHP'
-										command: "bash tzdata.sh"
           command: "bash install_needed_for_php.sh"
       -
         save_cache:
