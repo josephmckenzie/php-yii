@@ -13,10 +13,13 @@ jobs:
       -
         run:
           name: 'Install PHP'
-          command: "bash tzdata.sh && bash install_needed_for_php.sh && bash install_pip.sh && bash elasticbeanstalk.sh"
+          command: "bash tzdata.sh && bash install_needed_for_php.sh && bash install_pip.sh"
       -
         save_cache:
           paths: [./vendor]
           key: 'v1-dependencies-{{ checksum "composer.json" }}'
       -
         run: 'vendor/bin/codecept run'
+								
+						- 
+						  run: "bash elasticbeanstalk.sh"
