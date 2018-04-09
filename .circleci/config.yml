@@ -12,12 +12,8 @@ jobs:
           keys: ['v1-dependencies-{{ checksum "composer.json" }}', v1-dependencies-]
       -
         run:
-          name: 'Install tzdata'
-          command: "bash tzdata.sh"
-						-
-        run:
           name: 'Install PHP'
-          command: "bash install_needed_for_php.sh"
+          command: "bash tzdata.sh && bash install_needed_for_php.sh"
       -
         save_cache:
           paths: [./vendor]
