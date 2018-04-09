@@ -1,8 +1,12 @@
 #!/bin/bash
+export DEBIAN_FRONTEND=noninteractive
 
+apt-get install -y tzdata
+ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
 apt-get install apache2 -y
 apt-get install mysql-server -y
-yes '' | apt-get install php7.0 php7.0-fpm php7.0-mysql -y
+apt-get install php7.0 php7.0-fpm php7.0-mysql -y
 
 #have to press number 2 (America)
 #enter twice
